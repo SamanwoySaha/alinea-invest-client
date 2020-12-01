@@ -1,7 +1,10 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route } from 'react-router-dom';
+import Login from '../Shared/Login/Login';
 
-const PrivateRoute: React.FC = ({ children, ...rest }) => {
+const PrivateRoute: React.FC<any> = ({ children, ...rest }) => {
+    const [modalShow, setModalShow] = useState(true);
+
     return (
         <Route
             {...rest}
@@ -9,11 +12,9 @@ const PrivateRoute: React.FC = ({ children, ...rest }) => {
                 sessionStorage.getItem('email') ? (
                     children
                 ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: { from: location }
-                            }}
+                        <Login
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
                         />
                     )
             }

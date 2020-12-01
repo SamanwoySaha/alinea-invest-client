@@ -1,0 +1,58 @@
+.modal-content{
+    border-radius: 2.5rem !important;
+}
+
+.modal-body {
+    border-radius: 2.5rem;
+    width: 100%;
+    height: 35rem;
+    background: #AE42C9 !important;
+    position: relative;
+}
+
+.login-modal-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+
+    h1 {
+        font-weight: 800;
+    }
+}
+
+.login-modal-left {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #fff !important;
+    border-radius: 0 2.5rem 2.5rem 0;
+
+    .login-btn {
+        position: relative;
+    }
+
+    .modal-close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #fff;
+        color: #222;
+        font-size: 2rem;
+        outline: none;
+        cursor: pointer;
+        border: none;
+
+        &:hover {
+            background-color: #AE42C9 !important;
+        }
+    }
+}
+
+.modal-content {
+    border: none !important;
+}
+

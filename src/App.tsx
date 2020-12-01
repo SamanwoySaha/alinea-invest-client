@@ -8,6 +8,7 @@ import {
 import WatchList from './components/WatchList/WatchList';
 import Home from './components/Home/Home';
 import NoMatch from './components/NoMatch/NoMatch';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -20,9 +21,9 @@ function App() {
           <Route path='/home'>
             <Home></Home>
           </Route>
-          <Route path='/watchlist'>
+          <PrivateRoute path='/watchlist'>
             <WatchList></WatchList>
-          </Route>
+          </PrivateRoute>
           <Route path='*'>
             <NoMatch></NoMatch>
           </Route>
