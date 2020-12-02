@@ -1,26 +1,32 @@
-import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from '../Shared/Header/Header';
 import Stock from '../Shared/Stock/Stock';
 import './WatchList.scss';
 import { BsSearch } from 'react-icons/bs';
 import axios from '../../axios';
 
-const WatchList: React.FC = (ref) => {
+const WatchList: React.FC = () => {
     const searchTerm = useRef<HTMLInputElement>(null);
-    const [stocklist, setStocklist] = useState([]); 
+    const [searchResult, setSearchResult] = useState([]); 
+    const [watchlist, setWatchlist] = useState([]);
+    const [reloadWatchlist, setReloadWatchlist] = useState(false);
 
     const searchHanlder = (e: React.FormEvent) => {
-        e.preventDefault();
-        const searchText = searchTerm.current!.value!;
-        console.log(searchText);
+        e.preventDefault();   
+        axios(`/stockByName/${searchTerm.current!.value!}`)
+            .then(res => {
+                setSearchResult(res.data);
+            });
     }
 
     useEffect(() => {
-        axios('/stocks')
-            .then(res => {
-                setStocklist(res.data);
-            });
-    }, []);
+        axios('/watchlist')
+            .then(res => setWatchlist(res.data))
+    }, [reloadWatchlist]);
+
+    const handleReloadWatchlist = () => {
+        setReloadWatchlist(!reloadWatchlist);
+    };
 
     return (
         <div>
@@ -33,12 +39,22 @@ const WatchList: React.FC = (ref) => {
                         <button type="submit"><BsSearch /></button>
                     </div>
                 </form>
+                <ul className="searchResult">
+                    {
+                        searchResult !== [] && 
+                            searchResult.map((item: any) => <Stock key={item.name} handleReloadWatchlist={handleReloadWatchlist} btn={true} addStock={true} stock={item}></Stock>)
+                    }
+                </ul>
                 <h1 className="heading mt-5">Watchlist</h1>
                 <ul className="mt-5">
                     <li className="d-flex justify-space-between align-items-center">
                         <h3 className="sub-heading">Watchlist</h3>
                         <h3 className="sub-heading ml-auto">Market price</h3>
                     </li>
+                    {
+                        watchlist !== [] && 
+                            watchlist.map((item: any) => <Stock key={item.name} handleReloadWatchlist={handleReloadWatchlist} btn={true} addStock={false} stock={item}></Stock>)
+                    }
                 </ul>
             </div>
         </div>

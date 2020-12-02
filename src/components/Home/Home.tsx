@@ -25,7 +25,7 @@ const Home: React.FC = () => {
                         <h3 className="sub-heading ml-auto">Market price</h3>
                     </li>
                     {
-                        stocklist.map(item => <Stock stock={item}></Stock>)
+                        stocklist.map((item: any) => <Stock key={item.name} btn={false} addStock={false} stock={item}></Stock>)
                     }
                 </ul>
             </div>
