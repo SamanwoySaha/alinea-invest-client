@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
@@ -11,6 +11,8 @@ import NoMatch from './components/NoMatch/NoMatch';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
+  const [stocklist, setStocklist] = useState([]);
+
   return (
     <div className="App">
       <Router>

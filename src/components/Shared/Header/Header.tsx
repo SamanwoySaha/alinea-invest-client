@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Login from '../Login/Login';
 import './Header.scss';
 
 const Header: React.FC = () => {
-    const [activeRoute, setActiveRoute] = useState('home');
+    const { pathname } = useLocation();
     const [modalShow, setModalShow] = useState(false);
 
     return (
@@ -18,11 +18,11 @@ const Header: React.FC = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul className="navbar-nav ml-5">
-                        <li className={`nav-item ${activeRoute === 'home' && 'active'}`}>
-                            <Link onClick={() => setActiveRoute('home')} className="nav-link px-0" to="/home">Home</Link>
+                        <li className={`nav-item ${(pathname === '/home' || pathname === '/') && 'active'}`}>
+                            <Link className="nav-link px-0" to="/home">Home</Link>
                         </li>
-                        <li className={`nav-item ${activeRoute !== 'home' && 'active'}`}>
-                            <Link onClick={() => setActiveRoute('watchlist')} className="nav-link px-0" to="/watchlist">Watchlist</Link>
+                        <li className={`nav-item ${pathname === '/watchlist' && 'active'}`}>
+                            <Link className="nav-link px-0" to="/watchlist">Watchlist</Link>
                         </li>
                         {
                             sessionStorage.getItem('email')
