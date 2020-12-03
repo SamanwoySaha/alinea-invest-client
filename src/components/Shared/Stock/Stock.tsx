@@ -11,7 +11,6 @@ interface StockPrice {
 
 const Stock: React.FC<any> = ({ stock, btn, addStock, handleReloadWatchlist }) => {
     const [stockDetail, setStockDetail] = useState<StockPrice>();
-    const { pathname } = useLocation();
 
     const stockImage = stock.symbol === 'FB' ? 'https://i.imgur.com/l2qeDZ4.png'
         : stock.symbol === 'GOOGL' ? 'https://i.imgur.com/FR5L5MS.png'
